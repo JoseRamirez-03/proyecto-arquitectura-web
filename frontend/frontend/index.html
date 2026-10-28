@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Proyecto de Arquitectura</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        #resultado { margin-top: 20px; font-weight: bold; color: blue; }
+    </style>
+</head>
+<body>
+
+    <h1>Frontend: Single Page Application</h1>
+    <p>Haz clic en el botón para conectar con el contenedor/servidor.</p>
+    
+    <button onclick="conectarBackend()">Obtener Datos del Backend</button>
+    
+    <div id="resultado">Esperando conexión...</div>
+
+    <script>
+        // Esta función hace la conexión (Fetch) a nuestra API REST
+        function conectarBackend() {
+            document.getElementById('resultado').innerText = "Cargando...";
+            
+            fetch('[https://proyecto-arquitectura-web.onrender.com/api/datos](https://proyecto-arquitectura-web.onrender.com/api/datos)')
+                .then(respuesta => respuesta.json())
+                .then(datos => {
+                    // Si la conexión es exitosa, mostramos los datos en pantalla
+                    document.getElementById('resultado').innerText = 
+                        datos.mensaje + " (" + datos.tecnologia + ")";
+                })
+                .catch(error => {
+                    document.getElementById('resultado').innerText = 
+                        "Error: Asegúrate de que el backend esté encendido.";
+                });
+        }
+    </script>
+
+</body>
+</html>
